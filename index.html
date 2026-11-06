@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KasirPro — Aplikasi Kasir Offline Gratis untuk UMKM</title>
+<meta name="description" content="KasirPro: aplikasi kasir (POS) gratis yang bekerja tanpa internet untuk warung, kafe, salon, bengkel, konter HP, dan laundry. Struk WhatsApp, stok, laporan laba, data tersimpan di HP Anda.">
+<link rel="canonical" href="https://sandypradana886.github.io/kasirpro/">
+<meta name="theme-color" content="#0F3D3E">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KasirPro">
+<meta property="og:title" content="KasirPro — Kasir Offline Gratis untuk UMKM">
+<meta property="og:description" content="Satu aplikasi kasir untuk warung, kafe, salon, bengkel, konter HP, dan laundry. Gratis, tanpa internet, data di HP Anda.">
+<meta property="og:url" content="https://sandypradana886.github.io/kasirpro/">
+<meta property="og:image" content="https://sandypradana886.github.io/kasirpro/assets/og-image.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/poppins-extrabold.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "KasirPro",
+  "operatingSystem": "Android 7.0+",
+  "applicationCategory": "BusinessApplication",
+  "description": "Aplikasi kasir offline gratis untuk warung, kafe, salon, bengkel, konter HP, dan laundry.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" },
+  "author": { "@type": "Organization", "name": "Sandika Dev" },
+  "url": "https://sandypradana886.github.io/kasirpro/",
+  "downloadUrl": "https://play.google.com/store/apps/details?id=com.sandlabz.kasirpro"
+}
+</script>
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background:
+      radial-gradient(900px 480px at 85% -10%, rgba(127, 209, 199, .22), transparent 60%),
+      radial-gradient(600px 400px at -10% 110%, rgba(245, 179, 1, .06), transparent 60%),
+      linear-gradient(160deg, #11494A 0%, #0F3D3E 45%, #0A2B2C 100%);
+    padding: 56px 0 96px;
+  }
+  /* Tepi bawah bergerigi seperti struk */
+  .hero::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: -1px; height: 18px;
+    background: var(--paper);
+    -webkit-mask: conic-gradient(from 135deg at top, #000 90deg, #0000 0) 50% / 36px 100%;
+    mask: conic-gradient(from 135deg at top, #000 90deg, #0000 0) 50% / 36px 100%;
+  }
+  .hero .wrap { display: grid; gap: 48px; align-items: center; }
+  @media (min-width: 940px) { .hero { padding: 72px 0 120px; } .hero .wrap { grid-template-columns: 1.05fr .95fr; } }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 6px 14px; border-radius: 99px;
+    background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .16);
+    font-size: 13.5px; font-weight: 600; color: #DCF0EE;
+  }
+  .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--coin); display: inline-block; }
+  .hero h1 {
+    margin: 18px 0 16px;
+    font-size: clamp(2.3rem, 6.4vw, 3.9rem);
+    line-height: 1.06; letter-spacing: -.035em; font-weight: 800;
+  }
+  .hero h1 em { font-style: normal; color: var(--coin); }
+  .lede { font-size: clamp(1.02rem, 2.2vw, 1.18rem); color: #D3E7E4; max-width: 34em; margin: 0 0 28px; }
+  .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+  .play-badge img { height: 62px; width: auto; margin: -8px -10px -8px -7px; } /* badge resmi punya ruang kosong bawaan */
+  .link-light { color: #fff; font-weight: 600; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; min-height: 44px; }
+  .link-light:hover { text-decoration: underline; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; padding: 0; list-style: none; }
+  .facts li {
+    font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 99px;
+    background: rgba(255, 255, 255, .08); color: #E6F3F1;
+    border: 1px solid rgba(255, 255, 255, .12);
+  }
+
+  /* Mockup HP */
+  .phones { position: relative; aspect-ratio: 10 / 13; max-width: 480px; margin: 0 auto; width: 100%; }
+  .phone {
+    position: absolute; width: 56%; aspect-ratio: 540 / 1170;
+    border-radius: 34px; padding: 9px; background: #0B1615;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .35), 0 0 0 1px rgba(255, 255, 255, .08) inset;
+  }
+  .phone img { width: 100%; height: 100%; object-fit: cover; border-radius: 26px; }
+  .phone.back { left: 2%; top: 6%; transform: rotate(-7deg); opacity: .96; }
+  .phone.front { right: 2%; top: 0; transform: rotate(5deg); }
+  .coin-float {
+    position: absolute; left: 0; bottom: 3%; width: 74px; height: 74px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #FFD75A, #F5B301 55%, #C98A00);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .3), inset 0 0 0 7px rgba(201, 138, 0, .35);
+    display: grid; place-items: center; color: #7A5000; font-weight: 800; font-size: 22px;
+  }
+
+  /* ---------- Section umum ---------- */
+  section { padding: 72px 0; }
+  .kicker { color: var(--brand-ink); font-weight: 700; font-size: 13.5px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
+  h2 { font-size: clamp(1.7rem, 4.2vw, 2.5rem); line-height: 1.15; letter-spacing: -.025em; font-weight: 800; margin: 0 0 12px; }
+  .section-lede { color: var(--muted); max-width: 40em; margin: 0 0 36px; font-size: 1.04rem; }
+
+  /* Jenis usaha */
+  .biz-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .biz-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 980px) { .biz-grid { grid-template-columns: repeat(3, 1fr); } }
+  .biz {
+    --c: #0F3D3E;
+    position: relative; overflow: hidden;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 22px 20px; box-shadow: var(--shadow);
+  }
+  .biz::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--c); }
+  .biz-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .biz-icon {
+    width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 24px;
+    background: color-mix(in srgb, var(--c) 14%, var(--surface));
+  }
+  .biz h3 { margin: 0; font-size: 1.12rem; font-weight: 700; letter-spacing: -.01em; }
+  .biz ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .biz li { position: relative; padding-left: 24px; color: var(--muted); font-size: 14.5px; line-height: 1.5; }
+  .biz li::before {
+    content: ""; position: absolute; left: 0; top: .45em; width: 14px; height: 14px; border-radius: 50%;
+    background: color-mix(in srgb, var(--c) 18%, var(--surface));
+    box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--c) 70%, var(--surface));
+  }
+
+  /* Fitur */
+  .feat-band { background: var(--surface-2); }
+  .feat-grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 600px) { .feat-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 980px) { .feat-grid { grid-template-columns: repeat(4, 1fr); } }
+  .feat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .feat-icon {
+    width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 21px;
+    background: var(--coin-soft); margin-bottom: 12px;
+  }
+  .feat h3 { margin: 0 0 4px; font-size: 1rem; font-weight: 700; }
+  .feat p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.5; }
+
+  /* Galeri */
+  .gallery-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; }
+  .gallery-nav { display: none; gap: 8px; margin-bottom: 36px; }
+  @media (min-width: 760px) { .gallery-nav { display: flex; } }
+  .round-btn {
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface);
+    color: var(--ink); font-size: 20px; cursor: pointer; display: grid; place-items: center;
+  }
+  .round-btn:hover { background: var(--surface-2); }
+  .gallery {
+    display: grid; grid-auto-flow: column; grid-auto-columns: min(66vw, 250px); gap: 16px;
+    overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 16px 18px; margin: 0 -16px;
+    scrollbar-width: thin; overscroll-behavior-x: contain; scroll-padding-inline: 16px;
+  }
+  @media (min-width: 720px) { .gallery { margin: 0 -32px; padding: 4px 32px 18px; scroll-padding-inline: 32px; } }
+  .gallery figure { margin: 0; scroll-snap-align: start; }
+  .gallery img {
+    width: 100%; height: auto; aspect-ratio: 540 / 960; border-radius: 16px;
+    box-shadow: var(--shadow); background: var(--surface-2);
+  }
+
+  /* Langkah */
+  .steps { display: grid; gap: 16px; counter-reset: s; padding: 0; margin: 0; list-style: none; }
+  @media (min-width: 820px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .steps li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .steps li::before {
+    counter-increment: s; content: counter(s);
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; margin-bottom: 14px;
+    font-weight: 800; font-size: 18px; color: #6B4500;
+    background: radial-gradient(circle at 35% 30%, #FFD75A, #F5B301 60%, #DFA200);
+    box-shadow: inset 0 0 0 4px rgba(201, 138, 0, .35);
+  }
+  .steps h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  .steps p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+  /* Privasi */
+  .privacy-card {
+    display: grid; gap: 20px; align-items: center;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px;
+    box-shadow: var(--shadow);
+  }
+  @media (min-width: 820px) { .privacy-card { grid-template-columns: auto 1fr auto; padding: 32px 36px; } }
+  .shield {
+    width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; font-size: 30px;
+    background: color-mix(in srgb, var(--brand-ink) 14%, var(--surface));
+  }
+  .privacy-card h2 { font-size: clamp(1.35rem, 3vw, 1.75rem); margin-bottom: 6px; }
+  .privacy-card p { margin: 0; color: var(--muted); }
+  .btn-outline { border: 1.5px solid var(--line); color: var(--ink); background: transparent; }
+  .btn-outline:hover { background: var(--surface-2); }
+
+  /* FAQ */
+  .faq { display: grid; gap: 10px; max-width: 820px; }
+  .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 0 20px; }
+  .faq summary {
+    cursor: pointer; list-style: none; padding: 18px 32px 18px 0; position: relative;
+    font-weight: 600; font-size: 1.02rem;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    font-size: 24px; font-weight: 400; color: var(--brand-ink); transition: transform .2s ease;
+  }
+  .faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq details p { margin: 0 0 18px; color: var(--muted); }
+
+  /* CTA akhir */
+  .cta-band {
+    position: relative; overflow: hidden; color: #fff; text-align: center;
+    background: linear-gradient(160deg, #11494A, #0A2B2C);
+    border-radius: 28px; padding: 56px 24px;
+  }
+  .cta-band::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 16px; background: var(--paper);
+    -webkit-mask: conic-gradient(from -45deg at bottom, #000 90deg, #0000 0) 50% / 32px 100%;
+    mask: conic-gradient(from -45deg at bottom, #000 90deg, #0000 0) 50% / 32px 100%;
+  }
+  .cta-band h2 { color: #fff; margin-bottom: 8px; }
+  .cta-band p { color: #D3E7E4; margin: 0 auto 24px; max-width: 32em; }
+  .cta-band .play-badge { display: inline-block; }
+</style>
+</head>
+<body>
+<a class="skip" href="#isi">Lewati ke isi</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="KasirPro, beranda">
+      <img src="assets/logo.svg" width="34" height="34" alt="">
+      <span class="wordmark"><b>Kasir</b><span>Pro</span></span>
+    </a>
+    <nav class="nav" aria-label="Navigasi utama">
+      <a href="#usaha">Jenis usaha</a>
+      <a href="#fitur">Fitur</a>
+      <a href="#layar">Tampilan</a>
+      <a href="#faq">Tanya jawab</a>
+    </nav>
+    <a class="btn btn-primary header-cta" href="https://play.google.com/store/apps/details?id=com.sandlabz.kasirpro" rel="noopener">Unduh gratis</a>
+  </div>
+</header>
+
+<main id="isi">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow"><i aria-hidden="true"></i>Gratis · 100% offline · Tanpa daftar akun</span>
+        <h1>Kasir offline untuk semua <em>UMKM</em></h1>
+        <p class="lede">Satu aplikasi untuk warung, kafe, salon, bengkel, konter HP, dan laundry. Pilih jenis usaha, isi nama toko, langsung berjualan — data tersimpan aman di HP Anda.</p>
+        <div class="cta-row">
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.sandlabz.kasirpro" rel="noopener">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/id_badge_web_generic.png" alt="Temukan di Google Play" width="210" height="62">
+          </a>
+          <a class="link-light" href="#usaha">Lihat cara kerjanya <span aria-hidden="true">↓</span></a>
+        </div>
+        <ul class="facts" aria-label="Keunggulan">
+          <li>Tanpa internet</li>
+          <li>Struk via WhatsApp</li>
+          <li>Laporan laba otomatis</li>
+          <li>Android 7.0+</li>
+        </ul>
+      </div>
+      <div class="phones" aria-hidden="true">
+        <div class="phone back"><img src="assets/screens/app_beranda.webp" alt="" width="540" height="1170"></div>
+        <div class="phone front"><img src="assets/screens/app_kasir.webp" alt="" width="540" height="1170"></div>
+        <div class="coin-float">Rp</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="usaha" aria-labelledby="usaha-judul">
+    <div class="wrap">
+      <p class="kicker">6 jenis usaha</p>
+      <h2 id="usaha-judul">Satu aplikasi, menyesuaikan usaha Anda</h2>
+      <p class="section-lede">Saat pertama dibuka, pilih jenis usaha. Istilah, warna, dan fiturnya langsung menyesuaikan — dan bisa diganti kapan saja tanpa mencampur data.</p>
+      <div class="biz-grid">
+        <article class="biz" style="--c:#059669">
+          <div class="biz-head"><span class="biz-icon" aria-hidden="true">🏪</span><h3>Warung &amp; Toko</h3></div>
+          <ul>
+            <li>Pindai barcode langsung dengan kamera HP</li>
+            <li>Stok berkurang otomatis, ada peringatan stok menipis</li>
+            <li>Harga modal &amp; laba kotor tiap transaksi</li>
+          </ul>
+        </article>
+        <article class="biz" style="--c:#C2410C">
+          <div class="biz-head"><span class="biz-icon" aria-hidden="true">☕</span><h3>Kafe &amp; Resto</h3></div>
+          <ul>
+            <li>Makan di sini / bawa pulang dengan nomor meja</li>
+            <li>Catatan menu (less sugar, pedas) &amp; tiket dapur</li>
+            <li>Simpan pesanan meja, bayar belakangan · layanan &amp; PB1</li>
+          </ul>
+        </article>
+        <article class="biz" style="--c:#DB2777">
+          <div class="biz-head"><span class="biz-icon" aria-hidden="true">✂️</span><h3>Salon &amp; Barbershop</h3></div>
+          <ul>
+            <li>Layanan &amp; produk perawatan dalam satu kasir</li>
+            <li>Stylist per layanan dengan komisi otomatis</li>
+            <li>Antrian pelanggan yang sedang dilayani</li>
+          </ul>
+        </article>
+        <article class="biz" style="--c:#475569">
+          <div class="biz-head"><span class="biz-icon" aria-hidden="true">🏍️</span><h3>Bengkel</h3></div>
+          <ul>
+            <li>Plat nomor, merk/tipe, KM, dan keluhan kendaraan</li>
+            <li>SPK &amp; estimasi biaya untuk pelanggan</li>
+            <li>Komisi mekanik &amp; riwayat servis per plat</li>
+          </ul>
+        </article>
+        <article class="biz" style="--c:#7C3AED">
+          <div class="biz-head"><span class="biz-icon" aria-hidden="true">📱</span><h3>Konter HP</h3></div>
+          <ul>
+            <li>Pulsa, paket data, token listrik, dan aksesoris</li>
+            <li>Servis HP: tipe, IMEI, kelengkapan, keluhan</li>
+            <li>Tanda terima servis &amp; komisi teknisi</li>
+          </ul>
+        </article>
+        <article class="biz" style="--c:#2563EB">
+          <div class="biz-head"><span class="biz-icon" aria-hidden="true">🧺</span><h3>Laundry</h3></div>
+          <ul>
+            <li>Cucian kiloan &amp; satuan dengan status pengerjaan</li>
+            <li>DP &amp; pelunasan tercatat rapi</li>
+            <li>Kabar cucian siap ke pelanggan lewat WhatsApp</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="fitur" class="feat-band" aria-labelledby="fitur-judul">
+    <div class="wrap">
+      <p class="kicker">Untuk semua usaha</p>
+      <h2 id="fitur-judul">Semua yang dibutuhkan kasir, tanpa ribet</h2>
+      <p class="section-lede">Dibuat untuk dipakai sambil melayani pembeli: tombol besar, sedikit langkah, dan tidak bergantung sinyal.</p>
+      <div class="feat-grid">
+        <div class="feat"><div class="feat-icon" aria-hidden="true">📴</div><h3>100% offline</h3><p>Jualan tetap jalan tanpa sinyal. Tidak perlu daftar akun.</p></div>
+        <div class="feat"><div class="feat-icon" aria-hidden="true">🧾</div><h3>Struk rapi</h3><p>Cetak langsung ke printer thermal Bluetooth 58/80 mm, atau kirim ke WhatsApp pelanggan.</p></div>
+        <div class="feat"><div class="feat-icon" aria-hidden="true">📊</div><h3>Laporan otomatis</h3><p>Omzet, laba kotor, produk terlaris, dan metode bayar.</p></div>
+        <div class="feat"><div class="feat-icon" aria-hidden="true">📦</div><h3>Stok &amp; kategori</h3><p>Stok berkurang otomatis, lengkap dengan riwayat dan opname.</p></div>
+        <div class="feat"><div class="feat-icon" aria-hidden="true">💸</div><h3>Bayar fleksibel</h3><p>Tunai, transfer, QRIS; diskon per item atau per transaksi.</p></div>
+        <div class="feat"><div class="feat-icon" aria-hidden="true">☁️</div><h3>Backup otomatis</h3><p>Masuk dengan Google: data yang berubah dicadangkan ke Google Drive Anda sendiri.</p></div>
+        <div class="feat"><div class="feat-icon" aria-hidden="true">⚡</div><h3>Siap dalam 1 menit</h3><p>Panduan awal singkat, bisa mulai dengan data contoh.</p></div>
+        <div class="feat"><div class="feat-icon" aria-hidden="true">🌙</div><h3>Mode gelap</h3><p>Nyaman dipakai dari pagi sampai malam.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="layar" aria-labelledby="layar-judul">
+    <div class="wrap">
+      <div class="gallery-head">
+        <div>
+          <p class="kicker">Tampilan aplikasi</p>
+          <h2 id="layar-judul">Lihat KasirPro bekerja</h2>
+          <p class="section-lede">Geser untuk melihat kasir, pesanan meja, laporan, sampai servis bengkel.</p>
+        </div>
+        <div class="gallery-nav">
+          <button class="round-btn" type="button" data-scroll="-1" aria-label="Sebelumnya">‹</button>
+          <button class="round-btn" type="button" data-scroll="1" aria-label="Berikutnya">›</button>
+        </div>
+      </div>
+      <div class="gallery" id="gallery" tabindex="0" aria-label="Tangkapan layar KasirPro">
+        <figure><img src="assets/screens/01_pilih_usaha.webp" alt="Layar pilih jenis usaha: warung, kafe, salon, bengkel, konter HP, laundry" width="540" height="960" loading="lazy"></figure>
+        <figure><img src="assets/screens/02_beranda.webp" alt="Beranda kafe: penjualan hari ini dan pesanan yang belum dibayar" width="540" height="960" loading="lazy"></figure>
+        <figure><img src="assets/screens/03_kasir.webp" alt="Layar kasir: ketuk menu untuk menambah ke pesanan" width="540" height="960" loading="lazy"></figure>
+        <figure><img src="assets/screens/04_pesanan.webp" alt="Pesanan meja 5 dengan catatan dapur" width="540" height="960" loading="lazy"></figure>
+        <figure><img src="assets/screens/05_laporan.webp" alt="Laporan omzet, laba kotor, dan grafik 7 hari" width="540" height="960" loading="lazy"></figure>
+        <figure><img src="assets/screens/06_bengkel.webp" alt="Bengkel: plat, KM, keluhan, dan komisi mekanik" width="540" height="960" loading="lazy"></figure>
+        <figure><img src="assets/screens/07_onboarding.webp" alt="Panduan awal: pilih mulai dengan data contoh atau dari kosong" width="540" height="960" loading="lazy"></figure>
+        <figure><img src="assets/screens/08_konter.webp" alt="Konter HP: servis berjalan dan penjualan hari ini" width="540" height="960" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="mulai-judul" style="padding-top:24px">
+    <div class="wrap">
+      <p class="kicker">Cara mulai</p>
+      <h2 id="mulai-judul">Tiga langkah, langsung jualan</h2>
+      <p class="section-lede">Tidak perlu daftar, tidak perlu laptop.</p>
+      <ol class="steps">
+        <li><h3>Pasang dari Google Play</h3><p>Gratis, ukurannya kecil, jalan di Android 7.0 ke atas.</p></li>
+        <li><h3>Pilih usaha &amp; isi nama toko</h3><p>Atur pajak dan karyawan bila perlu — atau coba dulu dengan data contoh.</p></li>
+        <li><h3>Mulai mencatat penjualan</h3><p>Ketuk item di Kasir, terima pembayaran, kirim struk ke pelanggan.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="privasi-judul" style="padding-top:24px">
+    <div class="wrap">
+      <div class="privacy-card">
+        <div class="shield" aria-hidden="true">🔒</div>
+        <div>
+          <h2 id="privasi-judul">Data usaha Anda tetap milik Anda</h2>
+          <p>Produk, transaksi, dan pelanggan disimpan hanya di HP Anda. KasirPro tidak punya server dan tidak bisa melihat data Anda.</p>
+        </div>
+        <a class="btn btn-outline" href="privacy.html">Baca kebijakan privasi</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-judul" style="padding-top:24px">
+    <div class="wrap">
+      <p class="kicker">Tanya jawab</p>
+      <h2 id="faq-judul">Yang sering ditanyakan</h2>
+      <p class="section-lede">Belum menemukan jawabannya? Kirim email ke <a href="mailto:sandy.pradana8886@gmail.com">sandy.pradana8886@gmail.com</a>.</p>
+      <div class="faq">
+        <details>
+          <summary>Apakah KasirPro benar-benar gratis?</summary>
+          <p>Ya. Semua fitur gratis tanpa batas transaksi. KasirPro didukung iklan kecil di Beranda, Laporan, dan Riwayat — tidak pernah di layar kasir atau pembayaran.</p>
+        </details>
+        <details>
+          <summary>Apakah perlu internet?</summary>
+          <p>Tidak. Semua fitur kasir, stok, struk, dan laporan bekerja tanpa internet. Internet hanya dipakai untuk menampilkan iklan.</p>
+        </details>
+        <details>
+          <summary>Di mana data saya disimpan?</summary>
+          <p>Di HP Anda sendiri. Aktifkan backup otomatis Google Drive di Lainnya → Backup &amp; data: data yang berubah dicadangkan saat aplikasi ditutup dan setiap 15 menit, ke folder tersembunyi di Drive Anda sendiri.</p>
+        </details>
+        <details>
+          <summary>Bisakah mencetak struk?</summary>
+          <p>Bisa. Pasangkan printer thermal Bluetooth 58/80 mm, pilih di Lainnya → Printer struk, lalu cetak dengan satu ketukan atau otomatis setelah bayar. Struk juga bisa dikirim ke WhatsApp pelanggan yang nomornya tersimpan.</p>
+        </details>
+        <details>
+          <summary>Bagaimana kalau ganti HP?</summary>
+          <p>Pasang KasirPro di HP baru, ketuk <em>Pulihkan dari Google Drive</em> di layar pertama, lalu masuk dengan akun Google yang sama. Bisa juga lewat file backup di Lainnya → Backup &amp; data.</p>
+        </details>
+        <details>
+          <summary>Saya punya lebih dari satu usaha. Bisa?</summary>
+          <p>Bisa. Ganti jenis usaha kapan saja dari menu Lainnya. Data tiap usaha tersimpan terpisah, jadi tidak tercampur.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:24px">
+    <div class="wrap">
+      <div class="cta-band">
+        <h2>Mulai berjualan hari ini</h2>
+        <p>Gratis, tanpa internet, siap dalam satu menit.</p>
+        <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.sandlabz.kasirpro" rel="noopener">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/id_badge_web_generic.png" alt="Temukan di Google Play" width="210" height="62">
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="KasirPro">
+      <img src="assets/logo.svg" width="30" height="30" alt="">
+      <span class="wordmark"><b>Kasir</b><span>Pro</span></span>
+      <span style="color:var(--muted);font-size:14px;margin-left:6px">oleh Sandika Dev</span>
+    </a>
+    <nav aria-label="Tautan kaki">
+      <a href="privacy.html">Kebijakan privasi</a>
+      <a href="mailto:sandy.pradana8886@gmail.com">Kontak</a>
+      <a href="https://play.google.com/store/apps/details?id=com.sandlabz.kasirpro" rel="noopener">Google Play</a>
+    </nav>
+    <small>© 2026 Sandika Dev. Google Play dan logo Google Play adalah merek dagang Google LLC.</small>
+  </div>
+</footer>
+
+<script>
+  // Tombol geser galeri (desktop). Tanpa JS, galeri tetap bisa digeser.
+  document.querySelectorAll('[data-scroll]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var g = document.getElementById('gallery');
+      g.scrollBy({ left: Number(btn.dataset.scroll) * (g.clientWidth * 0.8), behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
