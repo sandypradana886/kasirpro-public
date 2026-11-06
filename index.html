@@ -242,8 +242,30 @@
       <a href="#fitur">Fitur</a>
       <a href="#layar">Tampilan</a>
       <a href="#faq">Tanya jawab</a>
+      <details class="nav-drop">
+        <summary>Kebijakan privasi <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+        <div class="nav-drop-panel">
+          <a href="privacy.html#id" hreflang="id"><b>Bahasa Indonesia</b><small>Kebijakan Privasi</small></a>
+          <a href="privacy.html#en" hreflang="en"><b>English</b><small>Privacy Policy</small></a>
+        </div>
+      </details>
     </nav>
     <a class="btn btn-primary header-cta" href="https://play.google.com/store/apps/details?id=com.sandlabz.kasirpro" rel="noopener">Unduh gratis</a>
+    <details class="menu">
+      <summary aria-label="Buka menu">
+        <svg class="i-open" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </summary>
+      <nav class="menu-panel" aria-label="Menu">
+        <a href="#usaha">Jenis usaha</a>
+        <a href="#fitur">Fitur</a>
+        <a href="#layar">Tampilan</a>
+        <a href="#faq">Tanya jawab</a>
+        <p class="menu-label"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg> Kebijakan privasi</p>
+        <a class="menu-privacy" href="privacy.html#id" hreflang="id">Bahasa Indonesia <small>Kebijakan Privasi</small></a>
+        <a class="menu-privacy" href="privacy.html#en" hreflang="en">English <small>Privacy Policy</small></a>
+      </nav>
+    </details>
   </div>
 </header>
 
@@ -398,7 +420,10 @@
           <h2 id="privasi-judul">Data usaha Anda tetap milik Anda</h2>
           <p>Produk, transaksi, dan pelanggan disimpan hanya di HP Anda. KasirPro tidak punya server dan tidak bisa melihat data Anda.</p>
         </div>
-        <a class="btn btn-outline" href="privacy.html">Baca kebijakan privasi</a>
+        <div class="privacy-actions">
+          <a class="btn btn-outline" href="privacy.html#id" hreflang="id">Baca kebijakan privasi</a>
+          <a class="link-en" href="privacy.html#en" hreflang="en">Read in English →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -458,7 +483,8 @@
       <span style="color:var(--muted);font-size:14px;margin-left:6px">oleh Sandika Dev</span>
     </a>
     <nav aria-label="Tautan kaki">
-      <a href="privacy.html">Kebijakan privasi</a>
+      <a href="privacy.html#id" hreflang="id">Kebijakan privasi</a>
+      <a href="privacy.html#en" hreflang="en">Privacy policy (English)</a>
       <a href="mailto:sandy.pradana8886@gmail.com">Kontak</a>
       <a href="https://play.google.com/store/apps/details?id=com.sandlabz.kasirpro" rel="noopener">Google Play</a>
     </nav>
@@ -474,6 +500,17 @@
       g.scrollBy({ left: Number(btn.dataset.scroll) * (g.clientWidth * 0.8), behavior: 'smooth' });
     });
   });
+</script>
+<script>
+  (function () {
+    document.querySelectorAll('.menu, .nav-drop').forEach(function (menu) {
+      menu.addEventListener('click', function (e) { if (e.target.closest('a')) menu.open = false; });
+      document.addEventListener('click', function (e) { if (menu.open && !menu.contains(e.target)) menu.open = false; });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
+      });
+    });
+  })();
 </script>
 </body>
 </html>

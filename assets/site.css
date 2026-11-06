@@ -58,7 +58,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
 
 body {
@@ -96,8 +96,61 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .nav { display: none; gap: 22px; margin-left: auto; }
 .nav a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 15px; }
 .nav a:hover { color: var(--ink); }
-.header-cta { margin-left: auto; }
-@media (min-width: 860px) { .nav { display: flex; } .header-cta { margin-left: 0; } }
+.header-cta { margin-left: auto; white-space: nowrap; }
+@media (min-width: 980px) { .nav { display: flex; } .header-cta { margin-left: 0; } }
+
+/* Menu ponsel (di bawah 980px nav disembunyikan) */
+.menu { position: static; }
+.menu > summary {
+  list-style: none; display: grid; place-items: center;
+  width: 44px; height: 44px; border-radius: 12px; cursor: pointer;
+  color: var(--ink); border: 1px solid var(--line); background: var(--surface);
+}
+.menu > summary::-webkit-details-marker { display: none; }
+.menu .i-close, .menu[open] .i-open { display: none; }
+.menu[open] .i-close { display: block; }
+.menu-panel {
+  position: absolute; left: 0; right: 0; top: 64px;
+  display: grid; padding: 8px 16px 16px;
+  background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow);
+}
+.menu-panel a {
+  display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 4px;
+  color: var(--ink); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--line);
+}
+.menu-panel a:last-child { border-bottom: 0; }
+.menu-label {
+  display: flex; align-items: center; gap: 8px; margin: 12px 4px 0;
+  font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em;
+}
+.menu-panel .menu-privacy { color: var(--brand-ink); font-weight: 600; justify-content: space-between; }
+.menu-privacy small { color: var(--muted); font-weight: 400; font-size: 13px; }
+
+/* Dropdown kebijakan privasi di nav desktop */
+.nav { align-items: center; }
+.nav-drop { position: relative; }
+.nav-drop > summary {
+  list-style: none; display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+  color: var(--muted); font-weight: 500; font-size: 15px;
+}
+.nav-drop > summary::-webkit-details-marker { display: none; }
+.nav-drop > summary:hover, .nav-drop[open] > summary { color: var(--ink); }
+.nav-drop[open] > summary svg { transform: rotate(180deg); }
+.nav-drop-panel {
+  position: absolute; right: 0; top: calc(100% + 12px); min-width: 210px; padding: 6px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow);
+  display: grid;
+}
+.nav .nav-drop-panel a { display: grid; padding: 10px 12px; border-radius: 10px; color: var(--ink); }
+.nav .nav-drop-panel a:hover { background: var(--surface-2); }
+.nav-drop-panel b { font-weight: 600; font-size: 15px; }
+.nav-drop-panel small { color: var(--muted); font-size: 13px; }
+.privacy-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.link-en { font-weight: 600; font-size: 15px; }
+@media (min-width: 720px) { .menu-panel { padding: 8px 32px 16px; } }
+@media (min-width: 980px) { .menu { display: none; } }
+@media (max-width: 420px) { .header-cta { padding: 10px 12px; font-size: 14px; } .site-header .wrap { gap: 8px; } .wordmark { font-size: 19px; } }
+@media (max-width: 349px) { .header-cta { display: none; } .menu { margin-left: auto; } }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
